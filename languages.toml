@@ -34,6 +34,7 @@ graphql-language-service = { command = "graphql-lsp", args = ["server", "-m", "s
 haskell-language-server = { command = "haskell-language-server-wrapper", args = ["--lsp"] }
 idris2-lsp = { command = "idris2-lsp" }
 intelephense = { command = "intelephense", args = ["--stdio"] }
+janet-lsp = { command = "janet-lsp" }
 jdtls = { command = "jdtls" }
 jsonnet-language-server = { command = "jsonnet-language-server", args= ["-t", "--lint"] }
 julia = { command = "julia", timeout = 60, args = [ "--startup-file=no", "--history-file=no", "--quiet", "-e", "using LanguageServer; runserver()", ] }
@@ -317,6 +318,28 @@ roots = []
 comment-token = "//"
 language-servers = [ "mint" ]
 indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "janet-simple"
+scope = "source.janet"
+file-types = ["cgen", "janet", "jdn"]
+shebangs = ["janet"]
+roots = ["project.janet"]
+comment-token = "#"
+language-servers = ["janet-lsp"]
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "janet-format" }
+
+[language.auto-pairs]
+'"' = '"'
+'(' = ')'
+'[' = ']'
+'{' = '}'
+"`" = "`"
+
+[[grammar]]
+name = "janet-simple"
+source = { git = "https://github.com/sogaiu/tree-sitter-janet-simple", rev = "bd9cbaf1ea8b942dfd58e68df10c9a378ab3d2b6" }
 
 [[language]]
 name = "json"
